@@ -28,9 +28,8 @@ public class Produit {
     @ManyToOne
     @JoinColumn(name = "idCateg")
     private Categorie categorie;
-    @ManyToOne
-    @JoinColumn(name = "facture")
-    private Facture facture;
+    @ManyToMany(mappedBy = "produits")
+    private List<Facture> factures;
     @ManyToMany(mappedBy = "produits")
     private List<Fournisseur> fournisseurs;
 

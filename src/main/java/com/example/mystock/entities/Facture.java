@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,9 +22,12 @@ public class Facture {
     private Double totalHT;
     private Double total_TVA;
     private Double total_TTC;
-    @OneToMany(mappedBy = "facture")
-    private List<Produit> produits;
     @ManyToOne
     @JoinColumn(name = "fournisseur")
     private Fournisseur fournisseur;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(name = "factures_produits",
+            joinColumns = { @JoinColumn(name = "fact_Achat") },
+            inverseJoinColumns = { @JoinColumn(name = "idProduit") })
+    private Set<Produit> produits ;
 }
