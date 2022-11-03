@@ -1,8 +1,6 @@
 package com.example.mystock.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +10,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Getter
+@Setter
 @Table(name = "Produits")
 public class Produit {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,71 +28,10 @@ public class Produit {
     @ManyToOne
     @JoinColumn(name = "idCateg")
     private Categorie categorie;
-
+    @ManyToOne
+    @JoinColumn(name = "facture")
+    private Facture facture;
     @ManyToMany(mappedBy = "produits")
     private List<Fournisseur> fournisseurs;
 
-    public Long getIdProduit() {
-        return idProduit;
-    }
-
-    public void setIdProduit(Long idProduit) {
-        this.idProduit = idProduit;
-    }
-
-    public String getLibProd() {
-        return libProd;
-    }
-
-    public void setLibProd(String libProd) {
-        this.libProd = libProd;
-    }
-
-    public String getDescProd() {
-        return descProd;
-    }
-
-    public void setDescProd(String descProd) {
-        this.descProd = descProd;
-    }
-
-    public Double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(Double prix) {
-        this.prix = prix;
-    }
-
-    public Date getDateAjout() {
-        return dateAjout;
-    }
-
-    public void setDateAjout(Date dateAjout) {
-        this.dateAjout = dateAjout;
-    }
-
-    public Float getPrixLivr() {
-        return prixLivr;
-    }
-
-    public void setPrixLivr(Float prixLivr) {
-        this.prixLivr = prixLivr;
-    }
-
-    public Marque getMarque() {
-        return marque;
-    }
-
-    public void setMarque(Marque marque) {
-        this.marque = marque;
-    }
-
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
 }
