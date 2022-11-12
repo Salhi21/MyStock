@@ -14,11 +14,4 @@ public class MyStockApplication {
         SpringApplication.run(MyStockApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner run(Utilisateur utilisateur) {
-//        return args -> {
-//            UtilisateurRepository.save
-//        }
-//    }
-
 }
