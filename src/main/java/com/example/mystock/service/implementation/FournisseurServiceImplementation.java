@@ -40,7 +40,8 @@ public class FournisseurServiceImplementation implements FournisseurService {
 
     @Override
     public Fournisseur update(Fournisseur fournisseur) {
-        return null;
+        log.info("Updating Fournisseur : {}",fournisseur.getIdFournisseur());
+        return fournisseurRepo.save(fournisseur);
     }
 
     @Override
