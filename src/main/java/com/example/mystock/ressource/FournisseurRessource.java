@@ -1,7 +1,6 @@
 package com.example.mystock.ressource;
 
 import com.example.mystock.entities.Fournisseur;
-import com.example.mystock.entities.Produit;
 import com.example.mystock.entities.Response;
 import com.example.mystock.service.implementation.FournisseurServiceImplementation;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/fournisseur")
 @RequiredArgsConstructor
-public class FournisseurService {
+public class FournisseurRessource {
     private final FournisseurServiceImplementation fournisseurServiceImplementation;
 
     @GetMapping("/list")
