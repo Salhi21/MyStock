@@ -44,5 +44,44 @@ public class ProduitRessource {
 
         );
     }
+    @DeleteMapping("/delete/{idProduit}")
+    public ResponseEntity<Response> deleteProudit(@PathVariable("idProduit") Long idProduit) {
+        return  ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("deleted",produitServiceImplementation.delete(idProduit)))
+                        .message("Produit deleted")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+
+        );
+    }
+    @PutMapping("/update/{idProduit}")
+    public ResponseEntity<Response> updateProduit(@PathVariable("idProduit") Long idProduit , @RequestBody Produit produit) {
+        return  ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("updated",produitServiceImplementation.update(produit)))
+                        .message("Produit updated")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+    @GetMapping("/get/{idProduit}")
+    public ResponseEntity<Response> pingServer(@PathVariable("idProduit") Long idProduit) {
+        return  ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("produit",produitServiceImplementation.get(idProduit)))
+                        .message("Produit retrieved")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+
+        );
+    }
+
 
 }

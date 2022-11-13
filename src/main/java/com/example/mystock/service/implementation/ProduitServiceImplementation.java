@@ -24,9 +24,9 @@ public class ProduitServiceImplementation implements ProduitService {
     }
 
     @Override
-    public Long get(Long idProduit) {
+    public Produit get(Long idProduit) {
         log.info("Fetching produit by id: {}",idProduit);
-        return prouitRepo.findById(idProduit).get().getIdProduit();
+        return prouitRepo.findById(idProduit).get();
     }
 
     @Override
