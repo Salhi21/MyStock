@@ -2,7 +2,7 @@ package com.example.mystock.service.implementation;
 
 import com.example.mystock.Repo.ProduitRepository;
 import com.example.mystock.entities.Produit;
-import com.example.mystock.service.produitService;
+import com.example.mystock.service.ProduitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +14,7 @@ import java.util.Collection;
 @Service
 @Transactional
 @Slf4j
-public class produitServiceImplementation implements produitService {
+public class ProduitServiceImplementation implements ProduitService {
     private final ProduitRepository prouitRepo ;
 
     @Override
@@ -24,9 +24,9 @@ public class produitServiceImplementation implements produitService {
     }
 
     @Override
-    public Produit get(Long idProduit) {
+    public Long get(Long idProduit) {
         log.info("Fetching produit by id: {}",idProduit);
-        return prouitRepo.findById(idProduit).get();
+        return prouitRepo.findById(idProduit).get().getIdProduit();
     }
 
     @Override
