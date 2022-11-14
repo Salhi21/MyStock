@@ -18,6 +18,8 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class ProduitRessource {
     private final ProduitServiceImplementation produitServiceImplementation;
+
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/list")
     public ResponseEntity<Response> getProduits() {
         return ResponseEntity.ok(

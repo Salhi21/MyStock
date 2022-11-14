@@ -1,5 +1,6 @@
 package com.example.mystock.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,11 +21,13 @@ public class Produit {
     private String libProd;
     private String descProd;
     private Double prix;
-    private Date dateAjout;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateAjout=new Date(System.currentTimeMillis());
     private Float prixLivr;
     @ManyToOne
     @JoinColumn(name = "idMarque")
     private Marque marque;
+
     @ManyToOne
     @JoinColumn(name = "idCateg")
     private Categorie categorie;
