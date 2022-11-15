@@ -14,12 +14,12 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@CrossOrigin(origins="*",allowedHeaders="*",maxAge = 3600)
 @RequestMapping("/produit")
 @RequiredArgsConstructor
 public class ProduitRessource {
     private final ProduitServiceImplementation produitServiceImplementation;
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/list")
     public ResponseEntity<Response> getProduits() {
         return ResponseEntity.ok(
