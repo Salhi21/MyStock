@@ -25,7 +25,7 @@ public class Facture {
     @ManyToOne
     @JoinColumn(name = "fournisseur")
     private Fournisseur fournisseur;
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch=FetchType.LAZY)
     @JoinTable(name = "factures_produits",
             joinColumns = { @JoinColumn(name = "fact_Achat") },
             inverseJoinColumns = { @JoinColumn(name = "idProduit") })
