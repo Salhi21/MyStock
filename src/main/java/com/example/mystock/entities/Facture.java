@@ -1,5 +1,6 @@
 package com.example.mystock.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +24,11 @@ public class Facture {
     private Double total_TVA;
     private Double total_TTC;
     @ManyToOne
-    @JoinColumn(name = "fournisseur")
+    @JoinColumn(name = "idFournisseur")
+    @JsonBackReference
     private Fournisseur fournisseur;
+
+    @JsonBackReference
     @ManyToMany(cascade = { CascadeType.ALL }, fetch=FetchType.LAZY)
     @JoinTable(name = "factures_produits",
             joinColumns = { @JoinColumn(name = "fact_Achat") },

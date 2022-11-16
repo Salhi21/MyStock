@@ -1,5 +1,6 @@
 package com.example.mystock.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Utilisateur {
     private String email;
     private Integer codePosta;
     private Date dateNaissance;
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "utilisateur")
     private List<Fournisseur> fournisseurs;
 

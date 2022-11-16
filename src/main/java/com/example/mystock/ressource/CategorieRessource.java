@@ -1,8 +1,10 @@
 package com.example.mystock.ressource;
 
+import com.example.mystock.entities.Categorie;
 import com.example.mystock.entities.Fournisseur;
+import com.example.mystock.entities.Produit;
 import com.example.mystock.entities.Response;
-import com.example.mystock.service.implementation.FournisseurServiceImplementation;
+import com.example.mystock.service.implementation.CategorieServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +16,18 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @CrossOrigin(origins="*",allowedHeaders="*",maxAge = 3600)
-@RequestMapping("/fournisseur")
+@RequestMapping("/categorie")
 @RequiredArgsConstructor
-public class FournisseurRessource {
-    private final FournisseurServiceImplementation fournisseurServiceImplementation;
+public class CategorieRessource {
+    private final CategorieServiceImplementation categorieServiceImplementation;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getFournisseur() {
+    public ResponseEntity<Response> getCategorie() {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("fournisseur",fournisseurServiceImplementation.list(30)))
-                        .message("Fournisseurs retrieved")
+                        .data(of("categorie",categorieServiceImplementation.list(30)))
+                        .message("Ctegories retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -33,55 +35,54 @@ public class FournisseurRessource {
         );
     }
     @PostMapping("/save")
-    public ResponseEntity<Response> createFournisseur(@RequestBody Fournisseur fournisseur) {
+    public ResponseEntity<Response> createCategorie(@RequestBody Categorie categorie) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("fournisseur",fournisseurServiceImplementation.create(fournisseur)))
-                        .message("Fournisseur ajoutée")
+                        .data(of("categorie",categorieServiceImplementation.create(categorie)))
+                        .message("Categorie crée")
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()
 
         );
     }
-
-    @DeleteMapping("/delete/{idFournisseur}")
-    public ResponseEntity<Response> deleteProudit(@PathVariable("idFournisseur") Long idFournisseur) {
+    @DeleteMapping("/delete/{idCateg}")
+    public ResponseEntity<Response> deleteProudit(@PathVariable("idCateg") Long idCateg) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("deleted",fournisseurServiceImplementation.delete(idFournisseur)))
-                        .message("Fournisseur deleted")
+                        .data(of("deleted",categorieServiceImplementation.delete(idCateg)))
+                        .message("Categorie deleted")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
 
         );
     }
-    @GetMapping("/get/{idFournisseur}")
-    public ResponseEntity<Response> pingServer(@PathVariable("idFournisseur") Long idFournisseur) {
+    @PutMapping("/update/{idCategorie}")
+    public ResponseEntity<Response> updateProduit(@PathVariable("idCategorie") Long idCategorie , @RequestBody Categorie categorie) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("fournisseur",fournisseurServiceImplementation.get(idFournisseur)))
-                        .message("Fournisseur retrieved")
+                        .data(of("updated",categorieServiceImplementation.update(categorie , idCategorie )))
+                        .message("Categorie updated")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+    @GetMapping("/get/{idCategorie}")
+    public ResponseEntity<Response> pingServer(@PathVariable("idCategorie") Long idCategorie) {
+        return  ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("categorie",categorieServiceImplementation.get(idCategorie)))
+                        .message("Categorie retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
 
-        );
-    }
-    @PutMapping("/update/{idFournisseur}")
-    public ResponseEntity<Response> updateProduit(@PathVariable("idFournisseur") Long idFournisseur , @RequestBody Fournisseur fournisseur) {
-        return  ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(of("updated",fournisseurServiceImplementation.update(fournisseur,idFournisseur)))
-                        .message("fournisseur updated")
-                        .status(OK)
-                        .statusCode(OK.value())
-                        .build()
         );
     }
 }

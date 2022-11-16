@@ -1,9 +1,13 @@
 package com.example.mystock.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,18 +26,21 @@ public class Produit {
     private String descProd;
     private Double prix;
     @Basic(optional = false)
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date dateAjout = new Date(System.currentTimeMillis());
+    private LocalDate dateAjout = LocalDate.now();
     private Float prixLivr;
     @ManyToOne
     @JoinColumn(name = "idMarque")
+    @JsonBackReference
     private Marque marque;
     @ManyToOne
     @JoinColumn(name = "idCateg")
+    @JsonBackReference
     private Categorie categorie;
+    @JsonManagedReference
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
     private List<Facture> factures;
+    @JsonBackReference
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
     private List<Fournisseur> fournisseurs;
 

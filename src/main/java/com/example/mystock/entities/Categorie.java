@@ -1,6 +1,7 @@
 package com.example.mystock.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,8 +19,8 @@ public class Categorie {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCateg;
     private String libCateg;
-    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "categorie")
+    @JsonManagedReference
     private List<Produit> produit;
 
   }

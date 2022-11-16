@@ -1,5 +1,8 @@
 package com.example.mystock.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,16 +24,18 @@ public class Fournisseur {
     private String adresseFournisseur;
     private String emailFournisseur;
     private Integer telFournisseur;
+    @JsonManagedReference
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "fournisseur")
-    private List<Facture> factures;
+    private List<Facture> facture;
     @ManyToOne
     @JoinColumn(name = "idutil")
+    @JsonBackReference
     private Utilisateur utilisateur;
     @ManyToMany(cascade = { CascadeType.ALL }, fetch=FetchType.LAZY)
+    @JsonManagedReference
     @JoinTable(name = "fournisseurs_produits",
             joinColumns = { @JoinColumn(name = "idFournisseur") },
             inverseJoinColumns = { @JoinColumn(name = "idProduit") })
     private Set<Produit> produits ;
-
 
 }

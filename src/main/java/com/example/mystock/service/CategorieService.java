@@ -4,11 +4,12 @@ import com.example.mystock.entities.Categorie;
 import com.example.mystock.entities.Fournisseur;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface CategorieService {
     Categorie create(Categorie categorie);
     Collection<Categorie> list(int limit);
     Categorie get(Long idCateg);
-    Categorie update(Categorie categorie);
+    Optional<Categorie> update(Categorie categorie, Long id);
     Boolean delete(Long idCateg);
 }
