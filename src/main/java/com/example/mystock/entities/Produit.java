@@ -34,10 +34,12 @@ public class Produit {
     @JsonBackReference
     private Marque marque;
     @ManyToOne
-    @JoinColumn(name = "idCateg")
+    @JoinColumn(name = "idCateg", nullable = false)
     @JsonBackReference
     private Categorie categorie;
+
     @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
     private List<Facture> factures;
     @JsonBackReference

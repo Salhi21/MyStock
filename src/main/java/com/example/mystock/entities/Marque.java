@@ -20,6 +20,7 @@ public class Marque {
     private Long idMarque;
     private String libMarque;
     @JsonManagedReference
+    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "marque")
     private List<Produit> produit;
 

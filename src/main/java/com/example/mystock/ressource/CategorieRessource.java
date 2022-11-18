@@ -7,12 +7,14 @@ import com.example.mystock.entities.Response;
 import com.example.mystock.service.implementation.CategorieServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static java.time.LocalDateTime.now;
 import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
+
 
 @RestController
 @CrossOrigin(origins="*",allowedHeaders="*",maxAge = 3600)
@@ -27,7 +29,7 @@ public class CategorieRessource {
                 Response.builder()
                         .timeStamp(now())
                         .data(of("categorie",categorieServiceImplementation.list(30)))
-                        .message("Ctegories retrieved")
+                        .message("Categories retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -35,7 +37,7 @@ public class CategorieRessource {
         );
     }
     @PostMapping("/save")
-    public ResponseEntity<Response> createCategorie(@RequestBody Categorie categorie) {
+    public ResponseEntity<Response> createCategorie(@RequestBody  Categorie categorie) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())

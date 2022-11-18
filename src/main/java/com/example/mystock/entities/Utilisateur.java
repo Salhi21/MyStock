@@ -24,6 +24,7 @@ public class Utilisateur {
     private Integer codePosta;
     private Date dateNaissance;
     @JsonManagedReference
+    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "utilisateur")
     private List<Fournisseur> fournisseurs;
 
