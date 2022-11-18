@@ -33,7 +33,6 @@ public class Fournisseur {
     private Utilisateur utilisateur;
     @ManyToMany(cascade = { CascadeType.ALL }, fetch=FetchType.LAZY)
     @JsonManagedReference
-    @JsonIgnore
     @JoinTable(name = "fournisseurs_produits",
             joinColumns = { @JoinColumn(name = "idFournisseur") },
             inverseJoinColumns = { @JoinColumn(name = "idProduit") })

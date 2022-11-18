@@ -1,5 +1,10 @@
 package com.example.mystock;
 
+import com.example.mystock.Repo.UtilisateurRepository;
+import com.example.mystock.entities.Utilisateur;
+import com.example.mystock.service.UtilisateurService;
+import com.example.mystock.service.implementation.UtilisateurServiceImplementation;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -15,12 +20,10 @@ public class MyStockApplication {
     }
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/produit").allowedOrigins("http://localhost:8080");
-            }
+    CommandLineRunner run (UtilisateurServiceImplementation utilisateur) {
+        return args -> {
+//            utilisateur.create(new Utilisateur(null,"ali","bhim","fff.com",2011,null,null));
+//              utilisateur.get(18L);
         };
     }
 

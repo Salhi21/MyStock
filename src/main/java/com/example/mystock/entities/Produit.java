@@ -38,8 +38,7 @@ public class Produit {
     @JsonBackReference
     private Categorie categorie;
 
-    @JsonManagedReference
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
     private List<Facture> factures;
     @JsonBackReference
