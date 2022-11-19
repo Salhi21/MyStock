@@ -6,6 +6,8 @@ import com.example.mystock.service.UtilisateurService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,9 +21,13 @@ import java.util.Optional;
 public class UtilisateurServiceImplementation implements UtilisateurService {
     private final UtilisateurRepository utilisateurRepository;
 
+    private PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+
     @Override
     public Utilisateur create(Utilisateur utilisateur) {
         log.info("Ajout d'un nouveau Utilisateur : {}",utilisateur.getIdutil());
+        String encodePassword = passwordEncoder.encode(utilisateur.getPassword());
+        utilisateur.setPassword(encodePassword);
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -31,10 +37,9 @@ public class UtilisateurServiceImplementation implements UtilisateurService {
         return utilisateurRepository.findAll(PageRequest.of(0,limit)).toList();
     }
 
-    @Override
-    public Utilisateur get(Long idutil) {
-        log.info("Fetching produit by id: {}",idutil);
-        return utilisateurRepository.findById(idutil).get();
+    public String get(String email, String password) {
+        log.info("Fetching users by LOGIN : {}",email);
+        return utilisateurRepository.findbyemailandpwd(email).getPassword();
     }
 
     @Override

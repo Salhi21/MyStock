@@ -22,8 +22,8 @@ public class MyStockApplication {
     @Bean
     CommandLineRunner run (UtilisateurServiceImplementation utilisateur) {
         return args -> {
-//            utilisateur.create(new Utilisateur(null,"ali","bhim","fff.com",2011,null,null));
-//              utilisateur.get(18L);
+//         utilisateur.create(new Utilisateur(null,"ali","bhim","fff.com","h2eau",2011,null,null));
+              utilisateur.get("h2eau","h2eau");
         };
     }
 

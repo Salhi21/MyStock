@@ -21,6 +21,7 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String email;
+    private String password;
     private Integer codePosta;
     private Date dateNaissance;
     @JsonManagedReference
