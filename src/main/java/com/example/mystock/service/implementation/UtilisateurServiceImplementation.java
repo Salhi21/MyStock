@@ -26,8 +26,8 @@ public class UtilisateurServiceImplementation implements UtilisateurService {
     @Override
     public Utilisateur create(Utilisateur utilisateur) {
         log.info("Ajout d'un nouveau Utilisateur : {}",utilisateur.getIdutil());
-        String encodePassword = passwordEncoder.encode(utilisateur.getPassword());
-        utilisateur.setPassword(encodePassword);
+//        String encodePassword = passwordEncoder.encode(utilisateur.getPassword());
+//        utilisateur.setPassword(encodePassword);
         return utilisateurRepository.save(utilisateur);
     }
 
@@ -37,11 +37,20 @@ public class UtilisateurServiceImplementation implements UtilisateurService {
         return utilisateurRepository.findAll(PageRequest.of(0,limit)).toList();
     }
 
-    public String get(String email, String password) {
-        log.info("Fetching users by LOGIN : {}",email);
-        return utilisateurRepository.findbyemailandpwd(email).getPassword();
+    @Override
+    public Utilisateur get(Long idUser) {
+        log.info("Fetching users by id: {}",idUser);
+        return utilisateurRepository.findById(idUser).get();
     }
 
+    @Override
+    public Utilisateur existsByEmailandPassword(String email, String password) {
+//        String encodePassword = passwordEncoder.encode(password);
+        Utilisateur utilisateur = utilisateurRepository.findByEmailAndPassword(email,password);
+        Long id = utilisateur.getIdutil();
+        log.info(String.valueOf(id));
+        return get(id);
+    }
     @Override
     public Optional<Utilisateur> update(Utilisateur utilisateur, Long idutil) {
         log.info("Updating Utilisateur : {}",idutil);
@@ -53,11 +62,11 @@ public class UtilisateurServiceImplementation implements UtilisateurService {
         });
     }
 
-
     @Override
     public Boolean delete(Long idutil) {
         log.info("Deleting user : {}",idutil);
         utilisateurRepository.deleteById(idutil);
         return Boolean.TRUE;
     }
+
 }

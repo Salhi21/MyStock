@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface UtilisateurService {
     Utilisateur create(Utilisateur utilisateur);
     Collection<Utilisateur> list(int limit);
-    String get(String email, String password);
+    Utilisateur existsByEmailandPassword(String email, String password);
+    Utilisateur get(Long id);
     Optional<Utilisateur> update(Utilisateur utilisateur, Long idutil);
     Boolean delete(Long idutil);
 }

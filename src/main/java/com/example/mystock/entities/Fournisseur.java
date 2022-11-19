@@ -26,6 +26,7 @@ public class Fournisseur {
     private Integer telFournisseur;
     @JsonManagedReference
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "fournisseur")
+    @JsonIgnore
     private List<Facture> facture;
     @ManyToOne
     @JoinColumn(name = "idutil")

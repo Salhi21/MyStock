@@ -26,7 +26,7 @@ public class Utilisateur {
     private Date dateNaissance;
     @JsonManagedReference
     @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "utilisateur")
     private List<Fournisseur> fournisseurs;
 
 }
