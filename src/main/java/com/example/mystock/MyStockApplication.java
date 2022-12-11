@@ -1,8 +1,10 @@
 package com.example.mystock;
 
 import com.example.mystock.Repo.UtilisateurRepository;
+import com.example.mystock.entities.Produit;
 import com.example.mystock.entities.Utilisateur;
 import com.example.mystock.service.UtilisateurService;
+import com.example.mystock.service.implementation.ProduitServiceImplementation;
 import com.example.mystock.service.implementation.UtilisateurServiceImplementation;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,10 +22,10 @@ public class MyStockApplication {
     }
 
     @Bean
-    CommandLineRunner run (UtilisateurServiceImplementation utilisateur) {
+    CommandLineRunner run (ProduitServiceImplementation produit) {
         return args -> {
-       //  utilisateur.create(new Utilisateur(null,"ali","bhim","fff.com","h2eau",2011,null,null));
-             utilisateur.existsByEmailandPassword("ho.com","mou");
+      //   produit.create(new Produit(null,"19","behi", 20.0,null,null,null,null,null));
+   //          utilisateur.existsByEmailandPassword("ho.","mou");
         };
     }
 }
