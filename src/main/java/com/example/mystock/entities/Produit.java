@@ -26,11 +26,12 @@ public class Produit {
     @JsonFormat(pattern="dd-MM-YYYY")
     private Date dateAjout;
     private Float prixLivr;
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idMarque")
     private Marque marque;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idCateg")
     private Categorie categorie;
 

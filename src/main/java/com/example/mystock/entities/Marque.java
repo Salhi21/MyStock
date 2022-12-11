@@ -19,7 +19,6 @@ public class Marque {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idMarque;
     private String libMarque;
-    @JsonIgnore
     @OneToMany(mappedBy = "marque")
     private List<Produit> produit;
 

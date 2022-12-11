@@ -19,11 +19,5 @@ public class MyStockApplication {
         SpringApplication.run(MyStockApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner run (UtilisateurServiceImplementation utilisateur) {
-        return args -> {
-       //  utilisateur.create(new Utilisateur(null,"ali","bhim","fff.com","h2eau",2011,null,null));
-             utilisateur.existsByEmailandPassword("ho.com","mou");
-        };
-    }
+
 }

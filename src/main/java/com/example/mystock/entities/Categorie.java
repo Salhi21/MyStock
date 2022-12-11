@@ -19,7 +19,6 @@ public class Categorie {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCateg;
     private String libCateg;
-    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "categorie")
     private List<Produit> produit;
 
