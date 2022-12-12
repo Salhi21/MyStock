@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Produits")
-public class Produit {
+public class Produit implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idProduit;
     private String libProd;
@@ -31,10 +32,10 @@ public class Produit {
     @JoinColumn(name = "idMarque")
     private Marque marque;
    @ManyToOne
-   @JoinColumn(name = "idCateg")
+   @JsonBackReference
+   @JoinColumn(name = "idCateg", nullable = false)
    private Categorie categorie;
-    @JsonBackReference
-    @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
-    private List<Facture> factures;
+   @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
+   private List<Facture> factures;
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -15,12 +16,13 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Categorie")
-public class Categorie {
+public class Categorie implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCateg;
     private String libCateg;
    @OneToMany(mappedBy = "categorie")
-    private List<Produit> produits;
+   @JsonManagedReference
+   private List<Produit> produits;
    public Categorie(Long idCateg, String libCateg) {
         this.idCateg = idCateg;
         this.libCateg = libCateg;
