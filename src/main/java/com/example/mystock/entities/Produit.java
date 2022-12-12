@@ -30,11 +30,9 @@ public class Produit {
     @JsonIgnore
     @JoinColumn(name = "idMarque")
     private Marque marque;
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "idCateg")
-    private Categorie categorie;
-
+   @ManyToOne
+   @JoinColumn(name = "idCateg")
+   private Categorie categorie;
     @JsonBackReference
     @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
     private List<Facture> factures;

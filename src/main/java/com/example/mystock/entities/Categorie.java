@@ -1,5 +1,6 @@
 package com.example.mystock.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -8,18 +9,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "Categorie")
 public class Categorie {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCateg;
     private String libCateg;
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "categorie")
-    private List<Produit> produit;
+   @OneToMany(mappedBy = "categorie")
+    private List<Produit> produits;
+   public Categorie(Long idCateg, String libCateg) {
+        this.idCateg = idCateg;
+        this.libCateg = libCateg;
+    }
 
   }
