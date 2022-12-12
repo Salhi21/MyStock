@@ -36,10 +36,11 @@ public class ProduitServiceImplementation implements ProduitService {
     }
 
     @Override
-    public Boolean delete(Long idProduit) {
+    public String delete(Long idProduit) {
         log.info("Deleting produit : {}",idProduit);
         prouitRepo.deleteById(idProduit);
-        return Boolean.TRUE;
+        System.out.println("deleting");
+        return "ok" ;
     }
 
     @Override
@@ -47,4 +48,21 @@ public class ProduitServiceImplementation implements ProduitService {
         log.info("fetching all products by id");
         return prouitRepo.findAll(PageRequest.of(0,limit)).toList();
     }
+    @Override
+    public Produit update(Long idProduit, Produit produit) {
+        log.info("Updating Produit : {}",produit.getIdProduit());
+        return prouitRepo.findById(idProduit).map(x->{
+            x.setPrix(produit.getPrix());
+            x.setCategorie(produit.getCategorie());
+            x.setDateAjout(produit.getDateAjout());
+            x.setLibProd(produit.getLibProd());
+            x.setPrixLivr(produit.getPrixLivr());
+            x.setDescProd(produit.getDescProd());
+            x.setMarque(produit.getMarque());
+            return prouitRepo.save(x);
+        }).orElseGet(()->{
+            produit.setIdProduit(idProduit);
+            return prouitRepo.save(produit);
+        });
+           }
 }

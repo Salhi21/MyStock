@@ -9,5 +9,6 @@ public interface ProduitService {
     Collection<Produit> list(int limit);
     Produit get(Long idProduit);
     Produit update(Produit produit);
-    Boolean delete(Long idProduit);
+    String delete(Long idProduit);
+    Produit update(Long idProduit,Produit produit);
 }

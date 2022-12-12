@@ -21,12 +21,12 @@ public class ProduitRessource {
     private final ProduitServiceImplementation produitServiceImplementation;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getProduits() {
+    public ResponseEntity<Response> getProduit() {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("produits",produitServiceImplementation.list(30)))
-                        .message("Proucts retrieved")
+                        .data(of("produit",produitServiceImplementation.list(30)))
+                        .message("Produits retrieved")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
@@ -34,7 +34,7 @@ public class ProduitRessource {
         );
     }
     @PostMapping("/save")
-    public ResponseEntity<Response> createProduit(@RequestBody  Produit produit) {
+    public ResponseEntity<Response> createProduit(@RequestBody Produit produit) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -59,20 +59,21 @@ public class ProduitRessource {
 
         );
     }
-    @PutMapping("/update/{idProduit}")
-    public ResponseEntity<Response> updateProduit(@PathVariable("idProduit") Long idProduit , @RequestBody Produit produit) {
+    @PutMapping("/update")
+    public ResponseEntity<Response> updateProduit(@RequestBody Produit produit) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(of("updated",produitServiceImplementation.update(produit)))
+                        .data(of("produit",produitServiceImplementation.update(produit)))
                         .message("Produit updated")
                         .status(OK)
                         .statusCode(OK.value())
                         .build()
+
         );
     }
     @GetMapping("/get/{idProduit}")
-    public ResponseEntity<Response> pingServer(@PathVariable("idProduit") Long idProduit) {
+    public ResponseEntity<Response> getProduit(@PathVariable("idProduit") Long idProduit) {
         return  ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -84,6 +85,18 @@ public class ProduitRessource {
 
         );
     }
+    @PutMapping("/update/{idProduit}")
+    public ResponseEntity<Response> updateProduit(@PathVariable("idProduit") Long idProduit,@RequestBody Produit produit) {
+        return  ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("produit",produitServiceImplementation.update(idProduit,produit)))
+                        .message("Produit updated")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
 
+        );
+    }
 
 }
