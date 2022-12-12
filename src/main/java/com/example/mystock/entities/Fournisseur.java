@@ -28,6 +28,10 @@ public class Fournisseur {
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "fournisseur")
     @JsonIgnore
     private List<Facture> facture;
+
+    @OneToMany( fetch=FetchType.LAZY,mappedBy = "fournisseur")
+    @JsonIgnore
+    private List<Commande> commandes;
     @ManyToOne
     @JoinColumn(name = "idutil")
     @JsonBackReference
