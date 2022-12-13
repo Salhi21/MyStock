@@ -44,7 +44,6 @@ public class FournisseurServiceImplementation implements FournisseurService {
     public Optional<Fournisseur> update(Fournisseur fournisseur, Long idFournisseur) {
         log.info("Updating Fournisseur : {}",idFournisseur);
         return fournisseurRepo.findById(idFournisseur).map(x-> {
-            x.setIdFournisseur(fournisseur.getIdFournisseur());
             x.setEmailFournisseur(fournisseur.getEmailFournisseur());
             x.setAdresseFournisseur(fournisseur.getAdresseFournisseur());
             x.setNomFournisseur(fournisseur.getNomFournisseur());
