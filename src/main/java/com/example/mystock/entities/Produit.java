@@ -33,7 +33,7 @@ public class Produit implements Serializable {
     private Marque marque;
    @ManyToOne
    @JsonBackReference
-   @JoinColumn(name = "idCateg", nullable = false)
+   @JoinColumn(name = "idCateg")
    private Categorie categorie;
    @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
    private List<Facture> factures;

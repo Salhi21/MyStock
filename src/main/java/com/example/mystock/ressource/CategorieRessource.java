@@ -32,7 +32,7 @@ public class CategorieRessource {
                         .message("Categories retrieved")
                         .status(OK)
                         .statusCode(OK.value())
-                        .build()
+                           .build()
 
         );
     }
