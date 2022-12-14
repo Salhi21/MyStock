@@ -34,11 +34,11 @@ public class Produit implements Serializable {
     @JoinColumn(name = "idMarque")
     private Marque marque;
    @ManyToOne
-   @JsonBackReference
    @JoinColumn(name = "idCateg")
    private Categorie categorie;
 
    @ManyToMany(fetch=FetchType.LAZY,mappedBy = "produits")
+   @JsonIgnore
    private List<Facture> factures;
 
 }

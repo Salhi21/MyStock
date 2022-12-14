@@ -25,7 +25,6 @@ public class Facture {
     private Double total_TVA;
     private Double total_TTC;
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "idFournisseur")
     private Fournisseur fournisseur;
 
