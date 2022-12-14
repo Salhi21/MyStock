@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -17,16 +18,15 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "fournisseurs")
-public class Fournisseur {
+public class Fournisseur implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idFournisseur;
     private String nomFournisseur;
     private String adresseFournisseur;
     private String emailFournisseur;
     private Integer telFournisseur;
+    @OneToMany(mappedBy = "fournisseur",cascade = CascadeType.ALL)
     @JsonManagedReference
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "fournisseur")
-    @JsonIgnore
     private List<Facture> facture;
 
     @OneToMany( fetch=FetchType.LAZY,mappedBy = "fournisseur")

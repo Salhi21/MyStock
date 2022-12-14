@@ -1,8 +1,6 @@
 package com.example.mystock.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "facture")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "fact_Achat")
 public class Facture {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long fact_Achat;
@@ -26,15 +25,13 @@ public class Facture {
     private Double total_TVA;
     private Double total_TTC;
     @ManyToOne
-    @JoinColumn(name = "idFournisseur")
     @JsonBackReference
+    @JoinColumn(name = "idFournisseur")
     private Fournisseur fournisseur;
 
-    @JsonManagedReference
-    @JsonIgnore
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch=FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE , fetch=FetchType.LAZY)
     @JoinTable(name = "factures_produits",
-            joinColumns = { @JoinColumn(name = "fact_Achat") },
-            inverseJoinColumns = { @JoinColumn(name = "idProduit") })
-    private Set<Produit> produits ;
+            joinColumns = { @JoinColumn(name = "fact_Achat",referencedColumnName = "fact_Achat") },
+            inverseJoinColumns = { @JoinColumn(name = "idProduit",referencedColumnName = "idProduit" )})
+    private List<Produit> produits ;
 }

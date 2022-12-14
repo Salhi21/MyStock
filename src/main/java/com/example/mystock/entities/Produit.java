@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,13 +19,14 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "Produits")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idProduit")
 public class Produit implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idProduit;
     private String libProd;
     private String descProd;
     private Double prix;
-    @JsonFormat(pattern="dd-MM-YYYY")
+    @JsonFormat(pattern="YYYY-DD-MM")
     private Date dateAjout;
     private Float prixLivr;
     @ManyToOne
@@ -35,7 +37,8 @@ public class Produit implements Serializable {
    @JsonBackReference
    @JoinColumn(name = "idCateg")
    private Categorie categorie;
-   @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,mappedBy = "produits")
+
+   @ManyToMany(fetch=FetchType.LAZY,mappedBy = "produits")
    private List<Facture> factures;
 
 }

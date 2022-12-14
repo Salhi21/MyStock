@@ -20,9 +20,11 @@ public class Categorie implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCateg;
     private String libCateg;
+
    @OneToMany(mappedBy = "categorie",cascade = CascadeType.ALL)
    @JsonManagedReference
    private List<Produit> produits;
+
    public Categorie(Long idCateg, String libCateg) {
         this.idCateg = idCateg;
         this.libCateg = libCateg;
