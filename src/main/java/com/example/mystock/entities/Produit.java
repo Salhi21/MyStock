@@ -26,7 +26,7 @@ public class Produit implements Serializable {
     private String libProd;
     private String descProd;
     private Double prix;
-    @JsonFormat(pattern="YYYY-DD-MM")
+    @JsonFormat(pattern="MM-DD-YYYY")
     private Date dateAjout;
     private Float prixLivr;
     @ManyToOne

@@ -20,6 +20,7 @@ import java.util.Set;
 public class Facture {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long fact_Achat;
+    @JsonFormat(pattern="DD/MM/YYYY")
     private Date date;
     private Double totalHT;
     private Double total_TVA;
